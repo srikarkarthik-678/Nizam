@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silk, Silver & Sovereignty — The Nizam's Legacy</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 17px;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      cursor: none;
+      background-color: #6b0f1a;
+      color: #f5dfa0;
+    }
+
+    /* ══════════════════════════════════════════
+   PALETTE
+══════════════════════════════════════════ */
+    :root {
+      --crimson-deep: #3d0008;
+      --crimson: #6b0f1a;
+      --crimson-mid: #7d1220;
+      --crimson-light: #8f1a2a;
+      --crimson-soft: #a02030;
+      --gold: #d4a017;
+      --gold-bright: #f0c040;
+      --gold-light: #e8cc70;
+      --gold-muted: #b07820;
+      --gold-dim: #7a5010;
+      --gold-border: rgba(212, 160, 23, 0.45);
+      --gold-border-s: rgba(212, 160, 23, 0.18);
+      --text-bright: #faebc0;
+      --text-mid: #e0c080;
+      --text-dim: #b89040;
+      --text-dark: #8a6820;
+    }
+
+    /* ══════════════════════════════════════════
+   CURSOR
+══════════════════════════════════════════ */
+    .cursor {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--gold-muted);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9000;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9000;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ══════════════════════════════════════════
+   GOLD DIVIDER
+══════════════════════════════════════════ */
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.8rem 0;
+    }
+
+    .gold-rule::before,
+    .gold-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-muted), var(--gold), var(--gold-muted), transparent);
+    }
+
+    .gold-rule span {
+      color: var(--gold);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .gold-bar {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-bright), var(--gold), var(--gold-dim), transparent);
+    }
+
+    .gold-bar-thin {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+    }
+
+    /* ══════════════════════════════════════════
+   SHIMMER TEXT
+══════════════════════════════════════════ */
+    .shimmer {
+      background: linear-gradient(90deg,
+          var(--gold-dim) 0%, var(--gold-light) 35%,
+          var(--gold-bright) 50%, var(--gold-light) 65%, var(--gold-dim) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to {
+        background-position: 200% center
+      }
+    }
+
+    /* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(36px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .35
+      }
+
+      50% {
+        opacity: .9
+      }
+    }
+
+    @keyframes flicker {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      92% {
+        opacity: .96
+      }
+
+      94% {
+        opacity: .88
+      }
+
+      96% {
+        opacity: .98
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.d1 {
+      transition-delay: .15s
+    }
+
+    .reveal.d2 {
+      transition-delay: .3s
+    }
+
+    .reveal.d3 {
+      transition-delay: .45s
+    }
+
+    /* ══════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 500;
+      background: var(--crimson-deep);
+      border-bottom: 3px solid var(--gold-muted);
+      transition: opacity 0.4s;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 3rem;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-bright);
+    }
+
+    .gold-bar.nav-bar {
+      height: 2px;
+    }
+
+    /* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      background-color: var(--crimson-deep);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9rem 2rem 5rem;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.09)' stroke-width='0.7'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3Cpath d='M12 40 Q26 50 40 40 Q26 30 12 40Z'/%3E%3Cpath d='M68 40 Q54 50 40 40 Q54 30 68 40Z'/%3E%3Ccircle cx='40' cy='12' r='2.5'/%3E%3Ccircle cx='40' cy='68' r='2.5'/%3E%3Ccircle cx='12' cy='40' r='2.5'/%3E%3Ccircle cx='68' cy='40' r='2.5'/%3E%3Ccircle cx='0' cy='0' r='2'/%3E%3Ccircle cx='80' cy='0' r='2'/%3E%3Ccircle cx='0' cy='80' r='2'/%3E%3Ccircle cx='80' cy='80' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 75% 65% at 50% 45%,
+          rgba(61, 0, 8, 0.0) 0%, rgba(61, 0, 8, 0.6) 80%, rgba(61, 0, 8, 0.85) 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-crest {
+      font-size: 3.8rem;
+      display: block;
+      margin: 0 auto 2rem;
+      animation: floatSlow 5s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(212, 160, 23, 0.5));
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      display: block;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: riseIn 1.2s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 5.5vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--gold-light);
+      text-shadow: 0 2px 40px rgba(212, 160, 23, 0.3), 0 0 80px rgba(212, 160, 23, 0.1);
+      opacity: 0;
+      animation: riseIn 1.4s 0.7s forwards, flicker 8s 3s ease-in-out infinite;
+    }
+
+    .hero-title .sub-title {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.42em;
+      font-weight: 400;
+      color: var(--gold-muted);
+      letter-spacing: 0.15em;
+      margin-top: 0.9rem;
+    }
+
+    .hero-sub {
+      max-width: 580px;
+      margin: 2rem auto 0;
+      font-family: 'IM Fell English', serif;
+      font-size: 1.12rem;
+      line-height: 1.9;
+      color: var(--text-mid);
+      font-style: italic;
+      opacity: 0;
+      animation: riseIn 1.2s 1.2s forwards;
+    }
+
+    .hero-rule {
+      max-width: 300px;
+      margin: 2.5rem auto;
+      opacity: 0;
+      animation: riseIn 1s 1.6s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cinzel', serif;
+      font-size: 0.52rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════
+   UNIVERSAL SECTION
+══════════════════════════════════════════ */
+    .sec {
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .sec-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .sec-dark {
+      background: var(--crimson-deep);
+    }
+
+    .sec-mid {
+      background: var(--crimson);
+    }
+
+    .sec-light {
+      background: var(--crimson-mid);
+    }
+
+    .sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.055)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3Cpath d='M12 40 Q26 50 40 40 Q26 30 12 40Z'/%3E%3Cpath d='M68 40 Q54 50 40 40 Q54 30 68 40Z'/%3E%3Ccircle cx='40' cy='12' r='2.5'/%3E%3Ccircle cx='40' cy='68' r='2.5'/%3E%3Ccircle cx='12' cy='40' r='2.5'/%3E%3Ccircle cx='68' cy='40' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .sec-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+
+    h2.royal {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 2.8rem);
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1.2;
+    }
+
+    p.body {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-mid);
+    }
+
+    p.body+p.body {
+      margin-top: 1.1rem;
+    }
+
+    p.body strong {
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+
+    p.body em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    /* ══════════════════════════════════════════
+   GOLD FRAME — photos
+══════════════════════════════════════════ */
+    .gold-frame {
+      position: relative;
+    }
+
+    .gold-frame::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px solid rgba(212, 160, 23, 0.35);
+      z-index: 0;
+    }
+
+    .gold-frame::after {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      right: 18px;
+      bottom: 18px;
+      border: 1px solid rgba(212, 160, 23, 0.12);
+      z-index: 0;
+    }
+
+    .gold-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: block;
+      border: 2px solid rgba(212, 160, 23, 0.4);
+      filter: sepia(15%) contrast(1.05) brightness(0.92);
+      transition: filter 0.5s, transform 0.5s;
+    }
+
+    .gold-frame img:hover {
+      filter: sepia(5%) contrast(1.08) brightness(1);
+      transform: scale(1.015);
+    }
+
+    /* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .pull-quote {
+      margin-top: 2rem;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--gold-muted);
+      background: rgba(212, 160, 23, 0.07);
+    }
+
+    .pull-quote p {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.85;
+      color: var(--text-mid);
+    }
+
+    /* ══════════════════════════════════════════
+   DYNASTY
+══════════════════════════════════════════ */
+    .dynasty-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4.5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .dynasty-grid img {
+      width: 100%;
+      border: 2px solid rgba(212, 160, 23, 0.35);
+      filter: sepia(15%) contrast(1.05) brightness(0.9);
+    }
+
+    /* ══════════════════════════════════════════
+   ARTEFACTS INTRO BAND
+══════════════════════════════════════════ */
+    .band {
+      background: var(--crimson-deep);
+      border-top: 3px solid var(--gold-dim);
+      border-bottom: 3px solid var(--gold-dim);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.07)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .band .inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .band p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-mid);
+      max-width: 720px;
+      margin: 1.5rem auto 0;
+      line-height: 1.9;
+    }
+
+    .art-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    .art-nav a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.57rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      text-decoration: none;
+      padding: 0.5rem 1.3rem;
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      transition: all 0.3s;
+    }
+
+    .art-nav a:hover {
+      color: var(--gold-bright);
+      border-color: var(--gold);
+      background: rgba(212, 160, 23, 0.08);
+    }
+
+    /* ══════════════════════════════════════════
+   ARTEFACT SECTIONS
+══════════════════════════════════════════ */
+    .art-sec {
+      padding: 7rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(212, 160, 23, 0.15);
+    }
+
+    .art-sec:nth-child(odd) {
+      background: var(--crimson-deep);
+    }
+
+    .art-sec:nth-child(even) {
+      background: var(--crimson);
+    }
+
+    .art-sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.06)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3Cpath d='M12 40 Q26 50 40 40 Q26 30 12 40Z'/%3E%3Cpath d='M68 40 Q54 50 40 40 Q54 30 68 40Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .art-wm {
+      position: absolute;
+      top: 1.5rem;
+      right: 2.5rem;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(7rem, 16vw, 14rem);
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(212, 160, 23, 0.05);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .art-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .art-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .art-num-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.57rem;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .art-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1.2;
+    }
+
+    .art-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--gold-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .art-body {
+      display: grid;
+      gap: 4.5rem;
+      align-items: start;
+    }
+
+    .art-body.l {
+      grid-template-columns: 1fr 1.1fr;
+    }
+
+    .art-body.r {
+      grid-template-columns: 1.1fr 1fr;
+    }
+
+    /* ── Image stacks ── */
+    .img-stack {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .img-stack.two {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .img-stack.three {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .img-stack.three img:first-child {
+      grid-column: 1/-1;
+    }
+
+    .img-stack.one {
+      grid-template-columns: 1fr;
+    }
+
+    /* vertical — single column, images stack top-to-bottom */
+    .img-stack.vertical {
+      grid-template-columns: 1fr;
+    }
+
+    .rimg {
+      width: 100%;
+      display: block;
+      border: 2px solid rgba(212, 160, 23, 0.3);
+      filter: sepia(15%) contrast(1.06) brightness(0.9);
+      transition: filter 0.5s, transform 0.5s;
+    }
+
+    .rimg:hover {
+      filter: sepia(5%) contrast(1.1) brightness(1);
+      transform: scale(1.018);
+    }
+
+    .art-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .story {
+      padding: 1.5rem 2rem;
+      background: rgba(212, 160, 23, 0.06);
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      position: relative;
+    }
+
+    .story::before {
+      content: '\275D';
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--gold-dim);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .story p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-mid);
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      background: rgba(212, 160, 23, 0.04);
+    }
+
+    .info-cell {
+      padding: 1rem 1.3rem;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.12);
+      border-right: 1px solid rgba(212, 160, 23, 0.12);
+    }
+
+    .info-cell:nth-child(even) {
+      border-right: none;
+    }
+
+    .info-cell:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .ik {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .iv {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-mid);
+    }
+
+    .inscription {
+      text-align: center;
+      padding: 1.4rem 2rem;
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      background: rgba(212, 160, 23, 0.05);
+      position: relative;
+    }
+
+    .inscription::before,
+    .inscription::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: var(--gold-dim);
+      border-style: solid;
+    }
+
+    .inscription::before {
+      top: 6px;
+      left: 6px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .inscription::after {
+      bottom: 6px;
+      right: 6px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .inscription p {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      line-height: 1.7;
+      color: var(--gold-muted);
+    }
+
+    /* ══════════════════════════════════════════
+   THREAD
+══════════════════════════════════════════ */
+    #thread {
+      background: var(--crimson-deep);
+      border-top: 3px solid var(--gold-dim);
+      border-bottom: 3px solid var(--gold-dim);
+      padding: 7rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #thread::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.08)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3Cpath d='M12 40 Q26 50 40 40 Q26 30 12 40Z'/%3E%3Cpath d='M68 40 Q54 50 40 40 Q54 30 68 40Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .thread-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .thread-flow {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 3.5rem 0 3rem;
+      gap: 0;
+    }
+
+    .t-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      flex: 1;
+      min-width: 130px;
+      border: 1px solid rgba(212, 160, 23, 0.22);
+      background: rgba(212, 160, 23, 0.05);
+      transition: background 0.4s;
+    }
+
+    .t-node:hover {
+      background: rgba(212, 160, 23, 0.1);
+    }
+
+    .t-icon {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .t-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.57rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+    }
+
+    .t-arrow {
+      display: flex;
+      align-items: center;
+      color: rgba(212, 160, 23, 0.3);
+      font-size: 1.1rem;
+      padding: 0 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .thread-text {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 1.08rem;
+      line-height: 1.95;
+      color: var(--text-mid);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════════
+   REFLECTION
+══════════════════════════════════════════ */
+    #reflection {
+      background: var(--crimson-deep);
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #reflection::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.06)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M40 12 Q50 26 40 40 Q30 26 40 12Z'/%3E%3Cpath d='M40 68 Q50 54 40 40 Q30 54 40 68Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .refl-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .refl-quote {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.9rem);
+      line-height: 1.85;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+
+    .refl-attr {
+      margin-top: 2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    .refl-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 4rem 0 0;
+      background: rgba(212, 160, 23, 0.15);
+      border: 1px solid rgba(212, 160, 23, 0.15);
+    }
+
+    .pillar {
+      background: var(--crimson-deep);
+      padding: 2.5rem 1.8rem;
+      text-align: center;
+    }
+
+    .pillar-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .pillar-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-dim);
+    }
+
+    /* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+    footer {
+      background: var(--crimson-deep);
+      border-top: 3px solid var(--gold-dim);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(212,160,23,0.06)' stroke-width='0.6'%3E%3Cellipse cx='40' cy='40' rx='18' ry='28'/%3E%3Cellipse cx='40' cy='40' rx='10' ry='16'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      margin-bottom: 1rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-text {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+    @media(max-width:900px) {
+
+      .about-grid,
+      .dynasty-grid,
+      .art-body.l,
+      .art-body.r {
+        grid-template-columns: 1fr;
+      }
+
+      .refl-pillars {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+
+      nav .nav-inner {
+        padding: 1rem 1.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .art-wm {
+        font-size: clamp(4rem, 12vw, 8rem);
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .thread-flow {
+        flex-direction: column;
+      }
+
+      .t-arrow {
+        transform: rotate(90deg);
+      }
+
+      .info {
+        grid-template-columns: 1fr;
+      }
+
+      .info-cell {
+        border-right: none;
+      }
+
+      .info-cell:nth-last-child(-n+2) {
+        border-bottom: 1px solid rgba(212, 160, 23, 0.12);
+      }
+
+      .info-cell:last-child {
+        border-bottom: none;
+      }
+
+      .img-stack.two,
+      .img-stack.three {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor" id="cur"></div>
+  <div class="cursor-dot" id="cdot"></div>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="topnav">
+    <div class="nav-inner">
+      <span class="nav-brand">&#10022;&ensp;Silk, Silver &amp; Sovereignty</span>
+      <ul class="nav-links">
+        <li><a href="#haveli">The Haveli</a></li>
+        <li><a href="#art1">Wardrobe</a></li>
+        <li><a href="#art2">Garments</a></li>
+        <li><a href="#art3">Ittardan</a></li>
+        <li><a href="#art4">Coins</a></li>
+        <li><a href="#art5">Portrait</a></li>
+        <li><a href="#thread">Legacy</a></li>
+      </ul>
+    </div>
+    <div class="gold-bar nav-bar"></div>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="hero-crest">&#9961;</span>
+      <span class="hero-eyebrow">A Heritage Field Study &nbsp;&middot;&nbsp; Nizam's Museum, Purani Haveli, Hyderabad
+        &nbsp;&middot;&nbsp; March 2026</span>
+      <h1 class="hero-title">
+        Silk, Silver &amp; Sovereignty
+        <span class="sub-title">The Living Legacy of the Nizams of Hyderabad</span>
+      </h1>
+      <p class="hero-sub">
+        Five artefacts. Six centuries. One dynasty that raised every object &mdash; a robe, a coin, a flask of perfume
+        &mdash; to the level of art and science. Enter Purani Haveli. Enter the past.
+      </p>
+      <div class="gold-rule hero-rule"><span>&#10022;</span></div>
+    </div>
+    <span class="hero-scroll">&#8595; &ensp; Scroll to begin</span>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="haveli" class="sec sec-mid">
+    <div class="gold-bar" style="position:absolute;top:0;left:0;right:0;"></div>
+    <div class="sec-inner">
+      <div class="about-grid">
+        <div class="gold-frame reveal">
+          <img src="purani_haveli.jpeg" alt="Purani Haveli"
+            onerror="this.style.minHeight='320px';this.style.background='rgba(212,160,23,0.06)'">
+        </div>
+        <div>
+          <span class="sec-label reveal">Introduction</span>
+          <h2 class="royal shimmer reveal d1">Purani Haveli &mdash; The Old Palace</h2>
+          <div class="gold-rule reveal d1"><span>&#10022;</span></div>
+          <p class="body reveal d2">
+            In the heart of Hyderabad's Old City stands <strong>Purani Haveli</strong> &mdash; meaning "Old Mansion"
+            &mdash; a palace whose origins trace to the Qutub Shahi era. Built in the <strong>18th-century European
+              architectural style</strong>, it features ornate facades, the Ayina Khaana (mirror hall), and Chinese
+            glass rooms, shaped like the letter "U" with two long wings flanking the central residence.
+          </p>
+          <p class="body reveal d3">
+            The <strong>Nizam's Museum</strong>, established in February 2000, displays the extraordinary gifts
+            presented to <em>Mir Osman Ali Khan, Asaf Jah VII</em> &mdash; the last Nizam &mdash; during his Silver
+            Jubilee in 1936. At its height this dynasty presided over one of the wealthiest kingdoms on earth, the
+            Nizam's fortune estimated at $230 billion in today's value.
+          </p>
+          <div class="pull-quote reveal d3">
+            <p>"Walking into Purani Haveli is not entering a museum. It is entering a memory &mdash; preserved in wood,
+              silk, silver, and stone."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gold-bar" style="position:absolute;bottom:0;left:0;right:0;"></div>
+  </section>
+
+  <!-- ═══════════ DYNASTY ═══════════ -->
+  <section id="dynasty" class="sec sec-dark">
+    <div class="sec-inner">
+      <div style="text-align:center;" class="reveal">
+        <span class="sec-label">The Rulers</span>
+        <h2 class="royal shimmer">From Qutub Shahi to Asaf Jahi</h2>
+        <div class="gold-rule" style="max-width:360px;margin:1.5rem auto;"><span>&#10022;</span></div>
+      </div>
+      <div class="dynasty-grid">
+        <div class="reveal">
+          <img src="WhatsApp Image 2026-03-28 at 19.04.38 (1).jpeg" alt="Dynasty Portrait Chart"
+            onerror="this.style.minHeight='430px';this.style.display='block';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+        <div class="reveal d2">
+          <p class="body">Two great dynasties shaped the Deccan. The <strong>Qutub Shahi Dynasty
+              (1518&ndash;1687)</strong>, founded by Sultan Quli Qutub-ul-Mulk, ruled from Golconda Fort and founded the
+            city of Hyderabad in 1591. Seven rulers governed under this dynasty, patronising art, architecture, and the
+            world-famed Golconda diamond trade.</p>
+          <div class="gold-rule"><span>&#10022;</span></div>
+          <p class="body">The <strong>Asaf Jahi Dynasty (1724&ndash;1948)</strong> &mdash; the Nizams &mdash; was
+            founded by Mir Qamaruddin Khan Nizam-ul-Mulk. Seven Nizams ruled over one of the world's most prosperous
+            kingdoms. The Sixth Nizam, <em>Mir Mahbub Ali Khan</em>, was legendary for his taste in fashion. The
+            Seventh, <em>Mir Osman Ali Khan</em>, was among the wealthiest individuals in all of human history.</p>
+          <div class="gold-rule"><span>&#10022;</span></div>
+          <p class="body">The five artefacts presented here are windows into this extraordinary legacy &mdash; each
+            object a chapter of a royal life lived with intelligence, artistry, and unrivalled grandeur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARTEFACTS BAND ═══════════ -->
+  <div class="band">
+    <div class="inner">
+      <span class="sec-label" style="display:block;text-align:center;">The Artefacts</span>
+      <h2 class="royal shimmer" style="text-align:center;">Five Objects. One Royal Life.</h2>
+      <p>Each artefact is a chapter. The wardrobe shelters the garments; the garments dress the body; the ittardan
+        perfumes the air; the coins underwrite it all; and the portrait immortalises the sovereign who commanded every
+        one of them.</p>
+      <div class="art-nav">
+        <a href="#art1">&#8544;&ensp;The Wardrobe</a>
+        <a href="#art2">&#8545;&ensp;Royal Garments</a>
+        <a href="#art3">&#8546;&ensp;Ittardan</a>
+        <a href="#art4">&#8547;&ensp;The Coins</a>
+        <a href="#art5">&#8548;&ensp;The Portrait</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ARTEFACT I — WARDROBE ═══════════ -->
+  <section id="art1" class="art-sec">
+    <div class="art-wm">I</div>
+    <div class="art-inner">
+      <div class="art-header reveal">
+        <span class="art-num-label">Artefact &ensp;&#8544;&ensp;&middot;&ensp;Engineering &middot; Architecture &middot;
+          Preservation</span>
+        <h3 class="art-title shimmer">The Nizam's Walk-in Wardrobe</h3>
+        <p class="art-subtitle">World's Longest Royal Dressing Hall &ensp;&middot;&ensp; 176 Feet of Burma Teak</p>
+      </div>
+      <div class="art-body l reveal">
+        <div class="img-stack one">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.36 (1).jpeg" alt="Wardrobe interior"
+            onerror="this.style.minHeight='240px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.36 (3).jpeg" alt="Wardrobe cabinets"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+        <div class="art-content">
+          <div class="story">
+            <p>Imagine being a royal servant walking through this endless corridor &mdash; not a hallway, but a wardrobe
+              filled with the king's clothes. This is a space not of containment, but of ceremony.</p>
+          </div>
+          <div class="info">
+            <div class="info-cell"><span class="ik">Material</span><span class="iv">Burma Teak &mdash; prized for
+                moisture resistance and structural durability</span></div>
+            <div class="info-cell"><span class="ik">Length</span><span class="iv">176 feet &mdash; one of the world's
+                longest walk-in wardrobes</span></div>
+            <div class="info-cell"><span class="ik">Levels</span><span class="iv">Two-tiered with a hand-cranked wooden
+                elevator &mdash; among India's oldest surviving mechanical lifts</span></div>
+            <div class="info-cell"><span class="ik">Built For</span><span class="iv">Nawab Mir Mahbub Ali Khan, the
+                Sixth Nizam of Hyderabad</span></div>
+          </div>
+          <p class="body">From an <strong>engineering perspective</strong>, this wardrobe demonstrates remarkable
+            intelligence in spatial design. The long, symmetrical two-level layout allows efficient access while wooden
+            cabinets regulate temperature and moisture &mdash; an early form of climate-controlled textile preservation.
+            Closed panels block dust and UV light, preventing colour fading in delicate silks.</p>
+          <p class="body">The sixth Nizam reportedly <em>never wore the same outfit twice</em>. Garments were gifted
+            away after a single use. The wardrobe was thus not merely storage but a living archive of royal fashion
+            &mdash; and a feat of 19th-century material science.</p>
+          <div class="inscription">
+            <p>"This is not just a wardrobe &mdash; it is a blend of architecture, science, and royal lifestyle, showing
+              how even storage was designed with intelligence and elegance."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARTEFACT II — GARMENTS ═══════════ -->
+  <section id="art2" class="art-sec">
+    <div class="art-wm">II</div>
+    <div class="art-inner">
+      <div class="art-header reveal">
+        <span class="art-num-label">Artefact &ensp;&#8545;&ensp;&middot;&ensp;Textile Science &middot; Craftsmanship
+          &middot; Royal Identity</span>
+        <h3 class="art-title shimmer">The Royal Garments</h3>
+        <p class="art-subtitle">Achkan &ensp;&middot;&ensp; Sherwani &ensp;&middot;&ensp; Sarees &mdash; Preserved
+          Stories of Royal Life</p>
+      </div>
+      <div class="art-body r reveal">
+        <div class="art-content">
+          <div class="story">
+            <p>Imagine opening one of these wooden cabinets and finding the personal clothes of the Nizam &mdash; each
+              outfit carefully preserved, reflecting royalty and elegance across centuries.</p>
+          </div>
+          <div class="info">
+            <div class="info-cell"><span class="ik">Achkan</span><span class="iv">Zar-e-baft (gold-woven) fabric
+                &middot; 19th Century &middot; Hyderabad</span></div>
+            <div class="info-cell"><span class="ik">Sherwani</span><span class="iv">Kim Khab brocade with metallic zari
+                &middot; 19th Century &middot; Hyderabad</span></div>
+            <div class="info-cell"><span class="ik">Saree</span><span class="iv">Fine Chikankari shadow-embroidery on
+                sheer muslin</span></div>
+            <div class="info-cell"><span class="ik">Preservation</span><span class="iv">Teak cabinet humidity control
+                &middot; dust exclusion &middot; restricted light</span></div>
+          </div>
+          <p class="body">Each garment is a marvel of <strong>material science and craft engineering</strong>.
+            <em>Zar-e-baft</em> fabric uses real gold and silver threads interwoven with silk &mdash; simultaneously
+            flexible and radiant. <em>Kim Khab</em> brocades are woven on handlooms using heavy silk with metallic zari
+            threads, requiring thousands of weft passes per inch.</p>
+
+          <p class="body">The Chikankari saree displays extraordinarily fine <strong>shadow embroidery</strong> on sheer
+            muslin, surviving over 150 years owing to the wardrobe's engineered environment. Royal fashion was identity
+            &mdash; each garment announced status, origin, and occasion simultaneously.</p>
+          <p class="body">From a scientific perspective, each fabric is a feat of material engineering. Zar-e-baft achieves the paradox of being simultaneously rigid in appearance yet fluid in movement, owing to the precise ratio of metallic to silk threads. Kim Khab's weight and density gave it natural insulating properties suited to the Deccan climate, while the translucency of the Chikankari saree's muslin base was achieved by spinning cotton to an almost impossibly fine count — a textile so delicate it was once described as "woven air."</p>
+          <p class="body">What preserved these garments across more than a century and a half is the wardrobe itself. The Burma Teak enclosures regulate humidity, preventing the expansion and contraction of fibres that causes thread breakage over time. Restricted light slows the photochemical degradation of natural dyes, and the spacing between garments ensures air circulation — a passive, architecture-driven conservation system that modern museum storage still replicates in principle."</p>
+          <p class="body">Royal fashion in the Nizam's court was never merely aesthetic — it was a language. The choice of fabric, colour, and cut communicated rank, occasion, and allegiance. An Achkan in gold-woven brocade worn to a formal durbar carried a different message from a linen sherwa worn at court for everyday affairs. Today, these garments survive not only as objects of beauty but as a record of a court culture where every thread was deliberate, every weave intentional, and every garment a statement of who the Nizam was — and intended to remain."</p>
+          <p class="body">Each garment displayed within the Nizam's wardrobe is far more than clothing — it is a document of power, taste, and civilisation. The collection includes the Achkan, a formal coat woven in Zar-e-baft — a fabric threaded with real gold and silver — the Sherwani in Kim Khab brocade, a heavy silk interlaced with metallic zari requiring thousands of weft passes per inch, and a Chikankari saree bearing the finest shadow embroidery on sheer muslin, a craft developed over centuries in the ateliers of Lucknow and Hyderabad.</p>
+          <div class="inscription">
+            <p>"These are not just clothes &mdash; they are preserved stories of royal life, protected through smart
+              design and timeless craftsmanship."</p>
+          </div>
+        </div>
+        <!-- ✦ CHANGED: images now in a single vertical column (class="vertical") -->
+        <div class="img-stack vertical">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.36 (2).jpeg" alt="Chikankari Saree"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.36 (3).jpeg" alt="Achkan"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.07.45 (1).jpeg" alt="Sherwani Kim Khab"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.07.45.jpeg" alt="Garments in wardrobe"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARTEFACT III — ITTARDAN ═══════════ -->
+  <section id="art3" class="art-sec">
+    <div class="art-wm">III</div>
+    <div class="art-inner">
+      <div class="art-header reveal">
+        <span class="art-num-label">Artefact &ensp;&#8546;&ensp;&middot;&ensp;Distillation Chemistry &middot; Olfactory
+          Arts &middot; Silver Filigree</span>
+        <h3 class="art-title shimmer">The Ittardan &mdash; Royal Perfume Ensemble</h3>
+        <p class="art-subtitle">A Functional Sculpture &ensp;&middot;&ensp; Fine Silver Filigree &ensp;&middot;&ensp;
+          The Tree of Abundance</p>
+      </div>
+      <div class="art-body l reveal">
+        <div class="img-stack three">
+          <img class="rimg" src="WhatsApp Image 2026-03-29 at 11.10.34 PM.jpeg" alt="Ittardan perfume bottles"
+            onerror="this.style.minHeight='260px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-24 at 20.24.27 (1).jpeg" alt="Silver Ittardan sculpture"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.38.jpeg" alt="Ittardan detail"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+        <div class="art-content">
+          <div class="story">
+            <p>After wearing his royal achkan, the Nizam's dressing ritual was not complete without this &mdash; the
+              final, invisible touch. A fragrance was not applied. It was gifted to the air itself.</p>
+          </div>
+          <div class="info">
+            <div class="info-cell"><span class="ik">Material</span><span class="iv">Fine silver filigree with
+                gold-plated accents and hand-painted glass cups</span></div>
+            <div class="info-cell"><span class="ik">Provenance</span><span class="iv">Gifted by the Raja of Palvancha
+                &middot; Silver Jubilee, 1936</span></div>
+            <div class="info-cell"><span class="ik">Symbolism</span><span class="iv">Tree of prosperity &middot;
+                coin-shaped leaves &middot; Krishna with flute at centre</span></div>
+            <div class="info-cell"><span class="ik">Ittar Science</span><span class="iv">Steam distillation (deg-bhapka)
+                in copper vessels &middot; sandalwood oil base</span></div>
+          </div>
+          <p class="body">This is not simply a perfume stand &mdash; it is a <strong>miniature sculptural
+              installation</strong>. A tree-like silver structure symbolising prosperity supports multiple glass
+            fragrance cups. The central figure, <em>Krishna with a flute</em>, adds divine and cultural resonance. The
+            base resembles a fort courtyard &mdash; the Nizam's own kingdom rendered in miniature.</p>
+          <p class="body">The <strong>science of ittar</strong> is remarkable. Traditional attars are produced through
+            <em>deg-bhapka distillation</em> &mdash; a copper-vessel technique where botanical materials (roses,
+            jasmine, oud) are steam-distilled into sandalwood oil. Glass containers prevent oxidation, preserving the
+            scent for centuries.</p>
+          <div class="inscription">
+            <p>"Royal clothing gave the Nizam his appearance &mdash; but fragrance gave him presence. Together, they
+              created a complete symbol of power and elegance."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARTEFACT IV — COINS ═══════════ -->
+  <section id="art4" class="art-sec">
+    <div class="art-wm">IV</div>
+    <div class="art-inner">
+      <div class="art-header reveal">
+        <span class="art-num-label">Artefact &ensp;&#8547;&ensp;&middot;&ensp;Metallurgy &middot; Numismatics &middot;
+          600 Years of Deccan Commerce</span>
+        <h3 class="art-title shimmer">The Coins of the Deccan</h3>
+        <p class="art-subtitle">Bahmani &ensp;&middot;&ensp; Adil Shahi &ensp;&middot;&ensp; Qutub Shahi
+          &ensp;&middot;&ensp; Osmania &mdash; From Bidar to Hyderabad</p>
+      </div>
+      <div class="art-body r reveal">
+        <div class="art-content">
+          <div class="story">
+            <p>Imagine the same Nizam who wore royal clothes and royal perfumes &mdash; using these very coins to govern
+              a powerful economy. Every coin is a small, circular history book.</p>
+          </div>
+          <div class="info">
+            <div class="info-cell"><span class="ik">Bahmani Coins</span><span class="iv">Copper &middot; 16th Century
+                &middot; Bidar</span></div>
+            <div class="info-cell"><span class="ik">Adil Shahi Coins</span><span class="iv">Copper &middot; 16th Century
+                &middot; Bijapur</span></div>
+            <div class="info-cell"><span class="ik">Qutub Shahi Coin</span><span class="iv">Copper &middot; 16th Century
+                &middot; Golconda</span></div>
+            <div class="info-cell"><span class="ik">Abdullah Qutub Shah</span><span class="iv">Copper &middot; 17th
+                Century &middot; Hyderabad</span></div>
+            <div class="info-cell"><span class="ik">Nizam VI Coin</span><span class="iv">Silver &middot; 1901 &middot;
+                Hyderabad</span></div>
+            <div class="info-cell"><span class="ik">Osmania Coins</span><span class="iv">German Silver, Silver &amp;
+                Copper &middot; 20th Century</span></div>
+          </div>
+          <p class="body">From a <strong>scientific perspective</strong>, coin minting in the Deccan was sophisticated
+            metallurgy. Copper and silver were smelted, alloyed for hardness, and struck with engraved steel dies.
+            Persian and Arabic inscriptions were cut using <em>burin tools</em> &mdash; an early and effective form of
+            anti-counterfeiting technology.</p>
+          <p class="body">The <strong>Osmania currency</strong> carried its own exchange rate across the Deccan. "German
+            Silver" Osmania coins were a deliberate silver-copper-nickel alloy balancing durability, appearance, and
+            cost. These coins span <strong>600 years of Deccan commerce</strong>, each funding the palaces, wardrobes,
+            perfumes, and arts that defined royal Hyderabad.</p>
+          <!-- ✦ NEW PARAGRAPH -->
+          <p class="body">What makes this collection particularly significant is the unbroken <strong>narrative of
+              succession</strong> it represents. From the rough copper coins of the Bahmani Sultanate to the finely
+            struck silver Osmania pieces of the 20th century, each dynasty built upon the monetary and cultural legacy
+            of the last. The inscription on a Qutub Shahi coin from Golconda and the inscription on an Osmania coin from
+            Hyderabad are separated by over three centuries &mdash; yet both assert, in different scripts and different
+            metals, the same truth: that <em>sovereignty is written in currency</em>, and that the Deccan was always a
+            civilisation that knew its own worth.</p>
+          <div class="inscription">
+            <p>"These coins are not just money &mdash; they are symbols of power, economy, and the very foundation of
+              the Nizam's royal lifestyle."</p>
+          </div>
+        </div>
+        <div class="img-stack one">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.37 (1).jpeg" alt="Bahmani Adil Shahi Madrasi coins"
+            onerror="this.style.minHeight='220px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 19.04.37.jpeg" alt="Qutub Shahi coins"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 5.19.29 PM.jpeg" alt="Osmania and Nizam VI coins"
+            onerror="this.style.minHeight='200px';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARTEFACT V — PORTRAIT ═══════════ -->
+  <section id="art5" class="art-sec">
+    <div class="art-wm">V</div>
+    <div class="art-inner">
+      <div class="art-header reveal">
+        <span class="art-num-label">Artefact &ensp;&#8548;&ensp;&middot;&ensp;Optics &middot; 3-Dimensional Perspective
+          &middot; Gemstone Artistry</span>
+        <h3 class="art-title shimmer">The Living Portrait</h3>
+        <p class="art-subtitle">Reverse Stained Glass &ensp;&middot;&ensp; Diamonds, Sapphires &amp; Emeralds
+          &ensp;&middot;&ensp; The Eyes That Follow You</p>
+      </div>
+      <div class="art-body l reveal">
+        <div class="img-stack one">
+          <img class="rimg" src="WhatsApp Image 2026-03-28 at 5.19.53 PM.jpeg" alt="Nizam's 3D Portrait"
+            onerror="this.style.minHeight='380px';this.style.background='rgba(212,160,23,0.05)'">
+        </div>
+        <div class="art-content">
+          <div class="story">
+            <p>As you stand before this portrait, something extraordinary occurs &mdash; the Nizam's gaze finds you
+              wherever you stand. His eyes follow. His shoes track your movement. He is here.</p>
+          </div>
+          <div class="info">
+            <div class="info-cell"><span class="ik">Medium</span><span class="iv">Reverse glass painting with precious
+                stones embedded into the surface</span></div>
+            <div class="info-cell"><span class="ik">Materials</span><span class="iv">Diamonds, sapphires, emeralds,
+                pearls, gold leaf, coloured stained glass</span></div>
+            <div class="info-cell"><span class="ik">Occasion</span><span class="iv">Commissioned for the Nizam's 50th
+                Birthday celebrations</span></div>
+            <div class="info-cell"><span class="ik">Science</span><span class="iv">Forced perspective + concave surface
+                geometry creates viewer-tracking optical illusion</span></div>
+          </div>
+          <p class="body">The portrait's most striking feature is its <strong>optical illusion</strong>. The eyes and
+            feet appear to follow the viewer as they move &mdash; achieved through a carefully engineered <em>concave
+              surface geometry</em> combined with precise shading and perspective depth. As the viewing angle changes,
+            the eyes maintain their apparent direction, creating the uncanny sensation of being observed.</p>
+          <p class="body">This principle, known as <strong>forced perspective</strong>, is used today in holograms, 3D
+            art installations, and immersive museum experiences. The Nizam is depicted in full <strong>royal
+              regalia</strong> &mdash; the sky-blue ceremonial robe, a jewelled sarpech, layered pearl necklaces &mdash;
+            all reproduced using precious stones set into the glass surface.</p>
+          <div class="inscription">
+            <p>"This is not just a portrait &mdash; it is a combination of art, science, and illusion that brings the
+              Nizam to life even today."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ THREAD ═══════════ -->
+  <section id="thread">
+    <div class="thread-inner">
+      <div style="text-align:center;" class="reveal">
+        <span class="sec-label">The Invisible Thread</span>
+        <h2 class="royal shimmer">How These Artefacts Speak to One Another</h2>
+        <div class="gold-rule" style="max-width:380px;margin:1.8rem auto;"><span>&#10022;</span></div>
+      </div>
+      <div class="thread-flow reveal">
+        <div class="t-node"><span class="t-icon">&#129683;</span><span class="t-name">Wardrobe</span></div>
+        <span class="t-arrow">&#8594;</span>
+        <div class="t-node"><span class="t-icon">&#128248;</span><span class="t-name">Garments</span></div>
+        <span class="t-arrow">&#8594;</span>
+        <div class="t-node"><span class="t-icon">&#127800;</span><span class="t-name">Ittardan</span></div>
+        <span class="t-arrow">&#8594;</span>
+        <div class="t-node"><span class="t-icon">&#129521;</span><span class="t-name">Coins</span></div>
+        <span class="t-arrow">&#8594;</span>
+        <div class="t-node"><span class="t-icon">&#128065;</span><span class="t-name">Portrait</span></div>
+      </div>
+      <p class="thread-text reveal">
+        The <strong>wardrobe</strong> is the container &mdash; an engineering marvel built to house royal garments.
+        Inside it, the <strong>garments</strong> speak of textile craftsmanship and identity. Completing the dressing
+        ritual, the <strong>ittardan</strong> adds fragrance &mdash; the invisible garment. All of this luxury was
+        funded by <strong>coins</strong> that powered a vast Deccan economy across six centuries. And presiding over it
+        all is the <strong>portrait</strong> &mdash; the Nizam himself, dressed as we have just described, his gaze
+        meeting yours across time.
+        <br><br>
+        <em>Together, these five objects form a complete portrait of royal existence: shelter for belongings, beauty
+          upon the body, fragrance in the air, wealth as foundation, and the sovereign gaze as the final, timeless
+          seal.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ REFLECTION ═══════════ -->
+  <section id="reflection">
+    <div class="refl-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:2rem;">
+        <span class="sec-label">Our Reflection</span>
+        <div class="gold-rule" style="max-width:300px;margin:1rem auto;"><span>&#10022;</span></div>
+      </div>
+      <p class="refl-quote reveal">&ldquo;Walking through the Nizam's Museum is not merely a lesson in history &mdash;
+        it is a lesson in how human beings have always sought to make life beautiful, organised, fragrant, meaningful,
+        and memorable. The objects do not speak of a distant past. They speak of us.&rdquo;</p>
+      <p class="refl-attr reveal">&mdash; Group Reflection &ensp;&middot;&ensp; Nizam's Museum Visit
+        &ensp;&middot;&ensp; March 2026</p>
+      <div class="refl-pillars reveal">
+        <div class="pillar">
+          <span class="pillar-icon">&#127963;</span>
+          <span class="pillar-name">Heritage</span>
+          <p class="pillar-text">These artefacts connect us to 600 years of Deccan civilisation &mdash; a living bridge
+            between the past and the present.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">&#9879;</span>
+          <span class="pillar-name">Science</span>
+          <p class="pillar-text">Every object embeds knowledge &mdash; in wood, metal, fibre, and light. The Nizams
+            were, in every sense, engineers of beauty.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">&#127759;</span>
+          <span class="pillar-name">Relevance</span>
+          <p class="pillar-text">The same principles live in modern design, chemistry, optics, and engineering &mdash;
+            the legacy of the Nizams is unbroken.</p>
+        </div>
+      </div>
+      <div class="gold-rule" style="max-width:300px;margin:4rem auto 0;"><span>&#10022;</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <span class="footer-brand">Silk, Silver &amp; Sovereignty &ensp;&middot;&ensp; Nizam's Museum, Purani Haveli,
+      Hyderabad &ensp;&middot;&ensp; 2026</span>
+    <p class="footer-text">
+      Field Visit: 15 March 2026 &ensp;&middot;&ensp; Assignment Submission: 29 March 2026<br>
+      All photographs captured during the visit. Research based on museum artefacts and historical records.
+    </p>
+  </footer>
+
+  <script>
+    const cur = document.getElementById('cur');
+    const cdot = document.getElementById('cdot');
+    document.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+      cdot.style.left = e.clientX + 'px'; cdot.style.top = e.clientY + 'px';
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    let py = 0;
+    const nav = document.getElementById('topnav');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      nav.style.opacity = (y > py && y > 300) ? '0' : '1';
+      py = y;
+    }, { passive: true });
+  </script>
+</body>
+
+</html>
